@@ -1,7 +1,7 @@
 # component target group
 resource "aws_lb_target_group" "main" {
   name     = "${var.project}-${var.environment}-${var.component}" #roboshop-dev-catalogue
-  port     = var.component_port
+  port     = local.tg_port
   protocol = "HTTP"
   vpc_id   = local.vpc_id
   deregistration_delay = 120
@@ -9,8 +9,8 @@ resource "aws_lb_target_group" "main" {
     healthy_threshold = 2
     interval = 5
     matcher = "200-299"
-    path = "/health"
-    port = var.component_port
+    path = local.health_check_path
+    port = local.tg_port
     timeout = 2
     unhealthy_threshold = 3
   }
@@ -40,7 +40,7 @@ resource "terraform_data" "main" {
   ]
   
   provisioner "file" {
-    source      = "${var.component}.sh"
+    source      = "bootstrap.sh"
     destination = "/tmp/${var.component}.sh"
   }
 
