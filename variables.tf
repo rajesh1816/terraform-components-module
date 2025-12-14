@@ -1,0 +1,29 @@
+variable "project" {
+    default = "roboshop"
+}
+
+variable "environment" {
+    default = "dev"
+}
+
+
+variable "component" {
+
+}
+
+variable "rule_priority" {
+    
+}
+
+variable "component_port" {
+  
+}
+
+
+variable "zone_id" {
+  default = "Z071935815H0BEQ3N2QXO"
+}
+
+variable "zone_name" {
+  default = "rajeshit.space"
+}
