@@ -198,7 +198,7 @@ resource "aws_autoscaling_policy" "main" {
 
 # backend alb listener rule for component target group
 resource "aws_lb_listener_rule" "main" {
-  listener_arn = local.backend_alb_listener_arn
+  listener_arn = local.alb_listener_arn
   priority     = 10
 
   action {
@@ -208,7 +208,7 @@ resource "aws_lb_listener_rule" "main" {
 
   condition {
     host_header {
-      values = ["${var.component}.backend-${var.environment}.${var.zone_name}"]
+      values = [local.rule_header_url]
     }
   }
 }
